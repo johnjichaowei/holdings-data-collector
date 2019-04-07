@@ -6,3 +6,6 @@ Style/Documentation:
 
 LineLength:
   Max: 120
+  
+RSpec/MessageSpies:
+  EnforcedStyle: receive

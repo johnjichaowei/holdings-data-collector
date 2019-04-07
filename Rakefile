@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require 'rubocop/rake_task'
+Dir.glob(File.join('lib/tasks/**/*.rake')).each { |file| load file }
 
-RuboCop::RakeTask.new do |task|
-  task.requires << 'rubocop-performance'
-  task.requires << 'rubocop-rspec'
-end
-
-task default: %w[rubocop]
+task default: %w[spec rubocop]
