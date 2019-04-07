@@ -1,5 +1,5 @@
 # holdings-data-collector
-A Lambda function to collect financial data for the holdings received from SQS queue, and store the collected data to S3.
+A Lambda function to collect financial data for the holdings received from SQS queue, and store the data to S3.
 
 ## Setup project
 

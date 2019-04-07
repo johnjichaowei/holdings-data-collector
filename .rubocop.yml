@@ -1,11 +1,15 @@
 AllCops:
   TargetRubyVersion: 2.5
 
-Style/Documentation:
-  Enabled: false
-
 LineLength:
   Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
   
 RSpec/MessageSpies:
   EnforcedStyle: receive
+
+Style/Documentation:
+  Enabled: false

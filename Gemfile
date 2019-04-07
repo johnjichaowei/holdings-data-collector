@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'dry-validation'
 gem 'faraday'
 gem 'rake'
 

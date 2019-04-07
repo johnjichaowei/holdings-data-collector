@@ -7,9 +7,6 @@ CMD sh
 
 RUN gem update bundler
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
-
 COPY Gemfile Gemfile.lock $APP_HOME/
 
 RUN apk update && \
