@@ -3,7 +3,12 @@ A Lambda function to collect financial data for the holdings received from SQS q
 
 ## Setup project
 
-### Within Docker
+### With Docker
+Install [Docker](https://docs.docker.com/install/) & [Docker Compose](https://docs.docker.com/compose/install/)
+
+```
+docker-compose build
+```
 
 ### On local machine
 Install [Ruby version 2.5.5](https://www.ruby-lang.org/en/documentation/installation/)
@@ -16,7 +21,11 @@ bundle install
 
 ## Run tests
 
-### Within Docker
+### With Docker
+
+```
+docker-compose run --rm test
+```
 
 ### On local machine
 
