@@ -10,4 +10,5 @@ group :develoopment, :test do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
+  gem 'simplecov'
 end

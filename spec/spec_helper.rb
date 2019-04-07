@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
-ENV['APP_ENV'] ||= 'test'
+require 'simplecov'
 
+if ENV['COVERAGE'] == 'true'
+  SimpleCov.start do
+    add_filter 'spec'
+    minimum_coverage 100
+  end
+end
+
+ENV['APP_ENV'] ||= 'test'
 $LOAD_PATH.unshift(File.expand_path('../app', __dir__))
 
 RSpec.configure do |config|
