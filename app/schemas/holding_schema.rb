@@ -2,7 +2,7 @@
 
 require 'dry-validation'
 
-class HoldingMessageSchema
+class HoldingSchema
   def self.schema # rubocop:disable Metrics/AbcSize
     Dry::Validation.Params do
       configure { config.type_specs = true }

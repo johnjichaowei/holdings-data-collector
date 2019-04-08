@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+require 'byebug'
+require 'envied'
 require 'simplecov'
+require 'webmock/rspec'
 
 if ENV['COVERAGE'] == 'true'
   SimpleCov.start do
@@ -9,8 +12,10 @@ if ENV['COVERAGE'] == 'true'
   end
 end
 
-ENV['APP_ENV'] ||= 'test'
 $LOAD_PATH.unshift(File.expand_path('../app', __dir__))
+
+ENV['APP_ENV'] ||= 'test'
+ENVied.require
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
