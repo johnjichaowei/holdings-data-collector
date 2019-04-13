@@ -9,7 +9,7 @@ class ParseFinanceData
     private
 
     def parse_eps(raw_text)
-      match_data = /<td.+?data-test="EPS_RATIO-value".*?><span.*?>(?<eps_text>.*?)<\/span><\/td>/.match(raw_text)
+      match_data = %r{<td.+?data-test="EPS_RATIO-value".*?><span.*?>(?<eps_text>.*?)</span></td>}.match(raw_text)
       match_data ? match_data[:eps_text] : nil
     end
   end
