@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'repositories/clients/finance_data_client'
+require 'finance_data_client'
 
 RSpec.describe FinanceDataClient do
   subject(:get) { described_class.get(holding_symbol) }

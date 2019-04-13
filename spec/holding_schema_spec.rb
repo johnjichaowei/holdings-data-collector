@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'schemas/holding_schema'
+require 'holding_schema'
 
 RSpec.describe HoldingSchema do
   subject(:valiated) { described_class.schema.call(holding_hash) }
