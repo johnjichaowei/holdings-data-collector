@@ -8,6 +8,7 @@ require 'utils/logging'
 class HoldingsDataCollector
   def self.call(event:, context:)
     ENVied.require
+    $LOAD_PATH.unshift(File.expand_path('../app', __dir__))
 
     LOGGER.info("Event: #{event}")
     LOGGER.info("Context: #{context}")

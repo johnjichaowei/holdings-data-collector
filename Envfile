@@ -1,3 +1,4 @@
 enable_defaults! { ENV['APP_ENV'] != 'production' }
 
 variable :FINANCE_DATA_HOST_URL, :string, default: 'https://au.finance.yahoo.com'
+variable :HOLDING_DATA_S3_BUCKET, :string, default: 'holding-data-collector-bucket'
