@@ -2,14 +2,14 @@
 
 require 'byebug'
 require 'envied'
-require 'simplecov'
 require 'webmock/rspec'
 
 if ENV['COVERAGE'] == 'true'
+  require 'simplecov'
   SimpleCov.start do
     add_filter 'spec'
-    minimum_coverage 100
   end
+  SimpleCov.minimum_coverage 100
 end
 
 $LOAD_PATH.unshift(File.expand_path('../app', __dir__))

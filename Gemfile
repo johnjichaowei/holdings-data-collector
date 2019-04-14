@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'dry-struct'
 gem 'dry-validation'
 gem 'envied'
 gem 'faraday'

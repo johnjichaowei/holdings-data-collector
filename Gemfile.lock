@@ -28,6 +28,11 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.2)
       dry-equalizer (~> 0.2)
+    dry-struct (0.6.0)
+      dry-core (~> 0.4, >= 0.4.3)
+      dry-equalizer (~> 0.2)
+      dry-types (~> 0.13)
+      ice_nine (~> 0.11)
     dry-types (0.14.1)
       concurrent-ruby (~> 1.0)
       dry-container (~> 0.3)
@@ -48,6 +53,7 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     hashdiff (0.3.8)
+    ice_nine (0.11.2)
     jaro_winkler (1.5.2)
     json (2.2.0)
     multipart-post (2.0.0)
@@ -103,6 +109,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  dry-struct
   dry-validation
   envied
   faraday
