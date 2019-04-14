@@ -2,11 +2,15 @@ version: '2.4'
 
 services:
   base:
-    build: 
+    build:
       context: .
     volumes:
       - .:/app
-      
+    environment:
+      - AWS_REGION
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+
   dev:
     extends:
       file: docker-compose.yml
@@ -14,7 +18,7 @@ services:
     environment:
       - APP_ENV=development
     command: sh
-  
+
   test:
     extends:
       file: docker-compose.yml

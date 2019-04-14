@@ -3,6 +3,10 @@ A Lambda function to collect financial data for the holdings received from SQS q
 
 ## Setup project
 
+### Config access to AWS
+
+Set AWS Credentials [using environment variables](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html#aws-ruby-sdk-credentials-environment)
+
 ### With Docker
 Install [Docker](https://docs.docker.com/install/) & [Docker Compose](https://docs.docker.com/compose/install/)
 
