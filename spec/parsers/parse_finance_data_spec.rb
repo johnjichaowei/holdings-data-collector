@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'parse_finance_data'
+require 'parsers/parse_finance_data'
 
 RSpec.describe ParseFinanceData do
   subject(:finance_data) { described_class.call(raw_text) }

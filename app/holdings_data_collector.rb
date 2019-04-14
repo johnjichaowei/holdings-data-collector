@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'envied'
-require_relative './logging'
+require 'utils/logging'
 
 class HoldingsDataCollector
   def self.call(event:, context:)

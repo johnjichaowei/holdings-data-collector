@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'finance_data_schema'
+require 'schemas/finance_data_schema'
 
 RSpec.describe FinanceDataSchema do
   subject(:validated) { described_class.schema.call(finance_data) }

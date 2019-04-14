@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative './errors/finance_data_validation_error'
-require_relative './finance_data_client'
-require_relative './finance_data_schema'
-require_relative './logging'
-require_relative './parse_finance_data'
+require 'errors/finance_data_validation_error'
+require 'schemas/finance_data_schema'
+require 'utils/logging'
+require 'parsers/parse_finance_data'
+require_relative './clients/finance_data_client'
 
 class FinanceDataRepository
   def self.get(holding_symbol)

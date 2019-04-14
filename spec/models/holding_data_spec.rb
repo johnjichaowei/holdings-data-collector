@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'holding_data'
+require 'models/holding_data'
 
 RSpec.describe HoldingData do
   subject(:holding_data) { described_class.build(holding, finance_data) }
