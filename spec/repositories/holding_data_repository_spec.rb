@@ -20,7 +20,7 @@ RSpec.describe HoldingDataRepository do
       }
     )
   end
-  let(:today) { Date.new(2019, 04, 15) }
+  let(:today) { Date.new(2019, 0o4, 15) }
   let(:s3_object_key) { "#{today}/CBA.json" }
   let(:holding_data_json) { holding_data.to_hash.to_json }
   let(:content_type) { 'application/json' }

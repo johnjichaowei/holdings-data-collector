@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'activesupport'
 gem 'aws-sdk-s3'
 gem 'dry-struct'
 gem 'dry-validation'
