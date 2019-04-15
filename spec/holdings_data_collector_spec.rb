@@ -46,15 +46,9 @@ RSpec.describe HoldingsDataCollector do
   end
 
   before do
-    allow(ENVied).to receive(:require)
     allow(HoldingSchema).to receive(:schema).and_return(holding_schema)
     allow(holding_schema).to receive(:call).and_return(validated)
     allow(HoldingDataCollectService).to receive(:call)
-  end
-
-  it 'loads the env variables' do
-    expect(ENVied).to receive(:require).once
-    handle
   end
 
   it 'validate the parsed holding message' do

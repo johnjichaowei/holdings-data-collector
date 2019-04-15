@@ -1,18 +1,15 @@
 # frozen_string_literal: true
 
-require 'rubygems'
-require 'bundler/setup'
-require 'envied'
+require_relative '../system/boot.rb'
 require 'utils/logging'
+require 'utils/hash_transformer'
+require 'schemas/holding_schema'
 require 'errors/holding_message_validation_error'
 require 'services/holding_data_collect_service'
 
 class HoldingsDataCollector
   class << self
     def handle(event:, context:)
-      ENVied.require
-      $LOAD_PATH.unshift(File.expand_path('../app', __dir__))
-
       LOGGER.info("Processing event: #{event}")
       LOGGER.info("Context: #{context}")
       event['Records'].each { |record| handle_message(record['body']) }
