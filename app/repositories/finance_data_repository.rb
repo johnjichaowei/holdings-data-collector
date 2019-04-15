@@ -8,6 +8,7 @@ require_relative './clients/finance_data_client'
 
 class FinanceDataRepository
   def self.get(holding_symbol)
+    LOGGER.info("Getting finance data for #{holding_symbol}")
     finance_data = ParseFinanceData.call(FinanceDataClient.get(holding_symbol))
     validated = FinanceDataSchema.schema.call(finance_data)
     unless validated.errors.empty?

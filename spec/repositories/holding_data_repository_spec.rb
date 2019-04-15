@@ -22,7 +22,21 @@ RSpec.describe HoldingDataRepository do
   end
   let(:today) { Date.new(2019, 0o4, 15) }
   let(:s3_object_key) { "#{today}/CBA.json" }
-  let(:holding_data_json) { holding_data.to_hash.to_json }
+  let(:holding_data_json) do
+    {
+      symbol: 'CBA',
+      name: 'Commonwealth Bank of Australia',
+      sectorName: 'Diversified Banks',
+      etfData: {
+        numberofshares: BigDecimal('14389879'),
+        marketValue: BigDecimal('1041683340.81'),
+        marketValPercent: BigDecimal('8.25647')
+      },
+      financeData: {
+        epsTtm: BigDecimal('4.62')
+      }
+    }.to_json
+  end
   let(:content_type) { 'application/json' }
 
   before do
