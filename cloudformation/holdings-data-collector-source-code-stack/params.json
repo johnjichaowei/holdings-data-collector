@@ -1,0 +1,6 @@
+[
+  {
+    "ParameterKey": "BucketName",
+    "ParameterValue": "holdings-data-collector-lambda-source-code"
+  }
+]

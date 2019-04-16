@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: the stack for the lambda function to publish the etf holdings to SNS
+
+Parameters:
+  SourceCodeS3Bucket:
+    Type: String
+    Description: Name of the S3 Bucket storing the lambda function's source code
+  SourceCodeS3Key:
+    Type: String
+    Description: Key of the lambda function's package file stored in S3 Bucket
+  FinanceDataHostUrl:
+    Type: String
+    Description: URL to retrieve the holding's finance data from
+  EtfHoldingsQueue:
+    Type: String
+    Description: Name of the SQS queue to listen the published ETF holdings
+  HoldingsDataS3Bucket:
+    Type: String
+    Description: Name of the S3 Bucket to store the holding's finance data to
+
+Resources:
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
+      Policies:
+        - PolicyName: "HoldingsDataCollectorPolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "s3:ListBucket"
+                  - "s3:GetObject"
+                  - "s3:PutObject"
+                Resource:
+                  - !Sub arn:aws:s3:::${HoldingsDataS3Bucket}
+                  - !Sub arn:aws:s3:::${HoldingsDataS3Bucket}/*
+              - Effect: "Allow"
+                Action:
+                  - "sqs:ReceiveMessage"
+                  - "sqs:DeleteMessage"
+                  - "sqs:GetQueueAttributes"
+                  - "sqs:ChangeMessageVisibility"
+                Resource: !GetAtt Queue.Arn
+  LambdaFunc:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      FunctionName: "holdings-data-collector-lambda"
+      Handler: "app.holdings_data_collector.HoldingsDataCollector.handle"
+      Role:
+        Fn::GetAtt:
+          - "LambdaRole"
+          - "Arn"
+      Code:
+        S3Bucket: !Ref SourceCodeS3Bucket
+        S3Key: !Ref SourceCodeS3Key
+      Runtime: "ruby2.5"
+      Timeout: 300
+      TracingConfig:
+        Mode: "Active"
+      Environment:
+        Variables:
+          APP_ENV: "production"
+          FINANCE_DATA_HOST_URL: !Ref FinanceDataHostUrl
+          HOLDING_DATA_S3_BUCKET: !Ref HoldingsDataS3Bucket
+
+  Queue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Ref EtfHoldingsQueue
+      VisibilityTimeout: 720
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn
+        maxReceiveCount: 3
+
+  DeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub ${EtfHoldingsQueue}-dead-letter
+
+  EventSourceMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      EventSourceArn: !GetAtt Queue.Arn
+      FunctionName: !GetAtt LambdaFunc.Arn
+      BatchSize: 1
+      Enabled: true
