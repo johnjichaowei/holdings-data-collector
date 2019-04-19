@@ -19,3 +19,7 @@ group :develoopment, :test do
   gem 'simplecov'
   gem 'webmock'
 end
+
+group :deployment do
+  gem 'rubyzip'
+end
