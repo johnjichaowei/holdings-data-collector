@@ -1,11 +1,11 @@
 [
   {
     "ParameterKey": "SourceCodeS3Bucket",
-    "ParameterValue": "etf-holdings-publisher-lambda-source-code"
+    "ParameterValue": "holdings-data-collector-lambda-source-code"
   },
   {
     "ParameterKey": "SourceCodeS3Key",
-    "ParameterValue": "etf-holdings-publisher-lambda.zip"
+    "ParameterValue": "holdings-data-collector-lambda.zip"
   },
   {
     "ParameterKey": "FinanceDataHostUrl",
@@ -18,9 +18,5 @@
   {
     "ParameterKey": "HoldingsDataS3Bucket",
     "ParameterValue": "holdings-data-bucket"
-  },
-  {
-    "ParameterKey": "ScheduleRuleName",
-    "ParameterValue": "etf-holdings-publisher-schedule-rule"
   }
 ]
