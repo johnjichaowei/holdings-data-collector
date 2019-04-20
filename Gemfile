@@ -21,6 +21,7 @@ group :develoopment, :test do
 end
 
 group :deployment do
+  gem 'aws-sdk-cloudformation'
   gem 'aws-sdk-lambda'
   gem 'rubyzip'
 end
