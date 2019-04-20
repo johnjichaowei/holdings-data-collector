@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../system/boot.rb'
 require 'utils/logging'
 require 'utils/hash_transformer'
 require 'schemas/holding_schema'

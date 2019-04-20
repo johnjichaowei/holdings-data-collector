@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 namespace :lambda do
   desc 'Upload lambda package to S3 bucket'
-  task :upload_package, [:package_file, :bucket_name, :object_key] do |t, args|
+  task :upload_package, [:package_file, :bucket_name, :object_key] do |_t, args|
     require 'aws-sdk-s3'
 
     args.with_defaults(

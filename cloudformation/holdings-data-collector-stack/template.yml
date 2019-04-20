@@ -59,7 +59,7 @@ Resources:
     Type: "AWS::Lambda::Function"
     Properties:
       FunctionName: "holdings-data-collector-lambda"
-      Handler: "app.holdings_data_collector.HoldingsDataCollector.handle"
+      Handler: "holdings_data_collect_function.handler"
       Role:
         Fn::GetAtt:
           - "LambdaRole"

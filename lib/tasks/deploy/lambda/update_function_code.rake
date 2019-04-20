@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 namespace :lambda do
   desc 'Update lambda function code'
-  task :update_function_code, [:function_name, :bucket_name, :object_key] do |t, args|
+  task :update_function_code, [:function_name, :bucket_name, :object_key] do |_t, args|
     require 'aws-sdk-lambda'
 
     args.with_defaults(

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-namespace :lambda do
+namespace :lambda do # rubocop:disable Metrics/BlockLength
   task :clean do
     rm_rf 'dist'
     rm_rf 'vendor'
@@ -22,7 +22,11 @@ namespace :lambda do
 
     puts 'Create lambda pacakge file...'
     zipfile_name = 'dist/lambda.zip'
-    source_files = Rake::FileList.new('app/**/*.rb', 'system/**/*.rb')
+    source_files = Rake::FileList.new(
+      'app/**/*.rb', 'system/**/*.rb',
+      'holdings_data_collect_function.rb',
+      'Envfile'
+    )
     libraries_files = Rake::FileList.new('vendor/**/*')
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|

@@ -1,5 +1,5 @@
 # holdings-data-collector
-A Lambda function to collect financial data for the holdings received from SQS queue, and store the data to S3.
+A Lambda function to collect financial data for the holdings received from SQS queue, and store the collected data to S3.
 
 ## Setup project
 
@@ -7,32 +7,34 @@ A Lambda function to collect financial data for the holdings received from SQS q
 
 Set AWS Credentials [using environment variables](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html#aws-ruby-sdk-credentials-environment)
 
-### With Docker
+### Install Docker
 Install [Docker](https://docs.docker.com/install/) & [Docker Compose](https://docs.docker.com/compose/install/)
+
+Then,
 
 ```
 docker-compose build
 ```
 
-### On local machine
-Install [Ruby version 2.5.5](https://www.ruby-lang.org/en/documentation/installation/)
-
-```
-gem install bundler
-
-bundle install
-```
-
 ## Run tests
-
-### With Docker
 
 ```
 docker-compose run --rm test
 ```
 
-### On local machine
+## Deploy to AWS
 
 ```
-bundle exec rake
+docker-compose run --rm dev rake deploy
 ```
+
+## Deployment details
+
+The deploy rake task deploys the lambda function to AWS with below steps,
+
+- Create the lambda package to `dist/lambda.zip` with the source code and dependencies
+- Deploy the S3 bucket cloudformation stack to AWS to store the lambda package
+- Upload the lambda package to the S3 bucket
+- Deploy the S3 bucket cloudformation stack to AWS to store the collected holdings data
+- Deploy the lambda function cloudformation stack to AWS
+- Update the lambda function code, so the lambda function can be updated even there is no cloudformation change
