@@ -29,5 +29,6 @@ namespace :lambda do
       source_files.each { |source_file| zipfile.add(source_file, source_file) }
       libraries_files.each { |library_file| zipfile.add(library_file, library_file) }
     end
+    puts 'Create lambda package finished'
   end
 end

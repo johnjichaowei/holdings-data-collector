@@ -13,5 +13,6 @@ namespace :lambda do
     s3 = Aws::S3::Resource.new
     obj = s3.bucket(args.bucket_name).object(args.object_key)
     obj.upload_file(args.package_file)
+    puts 'Upload lambda package finished'
   end
 end
