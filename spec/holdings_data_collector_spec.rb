@@ -9,7 +9,7 @@ RSpec.describe HoldingsDataCollector do
     {
       'Records' => [
         { 'messageId' => '059f36b4-87a3-44ab-83d2-661975830a7d',
-          'body' => holding_message }
+          'body' => { 'Message' => holding_message }.to_json }
       ]
     }
   end

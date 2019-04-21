@@ -18,5 +18,9 @@
   {
     "ParameterKey": "HoldingsDataS3Bucket",
     "ParameterValue": "holdings-data-bucket"
+  },
+  {
+    "ParameterKey": "EtfHoldingsSnsName",
+    "ParameterValue": "etf-holdings-topic"
   }
 ]

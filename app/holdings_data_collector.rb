@@ -11,7 +11,9 @@ class HoldingsDataCollector
     def handle(event:, context:)
       LOGGER.info("Processing event: #{event}")
       LOGGER.info("Context: #{context}")
-      event['Records'].each { |record| handle_message(record['body']) }
+      event['Records'].each do |record|
+        handle_message(JSON.parse(record['body'])['Message'])
+      end
     end
 
     private

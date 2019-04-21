@@ -18,6 +18,9 @@ Parameters:
   HoldingsDataS3Bucket:
     Type: String
     Description: Name of the S3 Bucket to store the holding's finance data to
+  EtfHoldingsSnsName:
+    Type: String
+    Description: Name of the ETF Holdings SNS to be subscribed to
 
 Resources:
   LambdaRole:
@@ -98,3 +101,27 @@ Resources:
       FunctionName: !GetAtt LambdaFunc.Arn
       BatchSize: 1
       Enabled: true
+
+  QueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref Queue
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal: "*"
+            Action:
+              - "sqs:SendMessage"
+            Resource: "*"
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Sub "arn:aws:sns:${AWS::Region}:${AWS::AccountId}:${EtfHoldingsSnsName}"
+
+  QueueSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Sub "arn:aws:sns:${AWS::Region}:${AWS::AccountId}:${EtfHoldingsSnsName}"
+      Endpoint: !GetAtt Queue.Arn
+      Protocol: "sqs"
